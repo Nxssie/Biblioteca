@@ -20,7 +20,7 @@ namespace Biblioteca.View
         public delegate void ActionButton(int value);
         public event ActionButton ClickButton;
 
-        private void searchBttn_Click(object sender, EventArgs e)
+        private void SearchBttn_Click(object sender, EventArgs e)
         {
             ClickButton(1);
         }
@@ -30,7 +30,7 @@ namespace Biblioteca.View
             ClickButton(2);
         }
 
-        private void salirBttn_Click(object sender, EventArgs e)
+        private void SalirBttn_Click(object sender, EventArgs e)
         {
             ClickButton(0);
         }

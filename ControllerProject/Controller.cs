@@ -12,11 +12,9 @@ namespace Biblioteca.Controller
     public class Controller
     {
         MainView mv;
-        Model.Model model;
 
         public Controller()
         {
-            model = new Model.Model();
             mv = new MainView();
             mv.ButtonClick += Listeners;
             mv.ShowDialog();

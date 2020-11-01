@@ -21,7 +21,7 @@ namespace Biblioteca.View
 
         public event buttonAction ButtonClick;
 
-        private void exitBttn_Click(object sender, EventArgs e)
+        private void ExitBttn_Click(object sender, EventArgs e)
         {
             ButtonClick(0);
         }

@@ -8,17 +8,12 @@ namespace Biblioteca.Model
 {
     public class Connection
     {
-        string connectChain
-        {
-            get;
-            set;
-        }
-
-        public MySqlConnection dbConnection
+        
+        public MySqlConnection DbConnection
         {
             get
             {
-                return dbConnection;
+                return DbConnection;
             }
         }
 
@@ -38,11 +33,11 @@ namespace Biblioteca.Model
         {
             string connectString = InitializeChain();
 
-            MySqlConnection dbConnection = new MySqlConnection(connectString);
+            MySqlConnection DbConnection = new MySqlConnection(connectString);
 
             try
             {
-                //dbConnection.Open();
+                DbConnection.Open();
                 //MessageBox.Show("Conexión realizada.");
             } catch (MySqlException ex)
             {
@@ -50,10 +45,10 @@ namespace Biblioteca.Model
             }
             finally
             {
-                dbConnection.Close();
+                DbConnection.Close();
             }
 
-            return dbConnection;
+            return DbConnection;
 
         }
 

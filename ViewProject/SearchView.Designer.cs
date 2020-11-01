@@ -53,7 +53,7 @@ namespace Biblioteca.View
             this.searchBttn.TabIndex = 0;
             this.searchBttn.Text = "Buscar";
             this.searchBttn.UseVisualStyleBackColor = true;
-            this.searchBttn.Click += new System.EventHandler(this.searchBttn_Click);
+            this.searchBttn.Click += new System.EventHandler(this.SearchBttn_Click);
             // 
             // label1
             // 
@@ -89,7 +89,7 @@ namespace Biblioteca.View
             this.salirBttn.TabIndex = 9;
             this.salirBttn.Text = "Salir";
             this.salirBttn.UseVisualStyleBackColor = true;
-            this.salirBttn.Click += new System.EventHandler(this.salirBttn_Click);
+            this.salirBttn.Click += new System.EventHandler(this.SalirBttn_Click);
             // 
             // label2
             // 
