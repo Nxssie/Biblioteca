@@ -29,8 +29,6 @@ namespace Biblioteca.Controller
                 MessageBox.Show("Contacte con el desarrollador de la aplicación. Error: GeneralException", "Error", MessageBoxButtons.OK);
                 Console.WriteLine(e.Message);
             }
-            
-            
         }
 
         public void Listeners(int valor)

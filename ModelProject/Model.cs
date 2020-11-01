@@ -30,23 +30,25 @@ namespace Biblioteca.Model
         public void DeleteAlumno(string dni)
         {
             CheckConnection();
-
-            if(CheckPrestamoPendiente(dni))
+            try
             {
                 string Query = "DELETE FROM ALUMNOS WHERE dni='" + dni + "'";
                 MySqlCommand Command = new MySqlCommand(Query, Connector);
                 MySqlDataReader deleteReader = Command.ExecuteReader();
                 Connector.Close();
-                deleteReader.Close();
-            } else
+            } catch (Exception e)
             {
-                UnableToDeleteAlumno();
+                MessageBox.Show("Contacte con el desarrollador de la aplicación. Error: GeneralException", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
                 Connector.Close();
             }
             
         }
 
-        private bool CheckPrestamoPendiente(string dni)
+        public bool CheckPrestamoPendiente(string dni)
         {
             CheckConnection();
             string Query = "SELECT * FROM PRESTAMOS WHERE codAlumno='" + dni + "' + estado='pendiente'";
@@ -55,19 +57,18 @@ namespace Biblioteca.Model
 
             if (prestamosReader.HasRows)
             {
-                prestamosReader.Close();
+                Connector.Close();
                 return false;
                 
             } else if (!prestamosReader.HasRows)
             {
-                prestamosReader.Close();
+                Connector.Close();
                 return true;
                 
             } else
             {
                 MessageBox.Show("Ha ocurrido un error inesperado");
                 return false;
-                
             }
         }
 
@@ -93,7 +94,6 @@ namespace Biblioteca.Model
                     PrimApellido = dataReader.GetString(2);
                     SegApellido = dataReader.GetString(3);
                 }
-                dataReader.Close();
                 Connector.Close();
 
                 Sample = new Alumno(Dni, Nombre, PrimApellido, SegApellido);

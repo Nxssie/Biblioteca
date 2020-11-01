@@ -101,8 +101,14 @@ namespace Biblioteca.Controller
         {
             try
             {
-                model.DeleteAlumno(sv.GetDniLabel.Text);
-                RefreshForm();
+                if(model.CheckPrestamoPendiente(sv.GetDniLabel.Text)){
+                    model.UnableToDeleteAlumno();
+                } else
+                {
+                    model.DeleteAlumno(sv.GetDniLabel.Text);
+                    RefreshForm();
+                }
+                
             }
             catch (Exception e)
             {
