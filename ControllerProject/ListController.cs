@@ -15,11 +15,25 @@ namespace Biblioteca.Controller
 
         public ListController()
         {
-            lv = new View.ListView();
-            model = new Model.Model();
-            lv.ButtonClick += Listeners;
-            FillDatagrid();
-            lv.ShowDialog();
+            try
+            {
+                lv = new View.ListView();
+                model = new Model.Model();
+                lv.ButtonClick += Listeners;
+                FillDatagrid();
+                lv.ShowDialog();
+            }
+            catch (NullReferenceException nre)
+            {
+                MessageBox.Show("Contacte con el desarrollador de la aplicación. Error: NullReferenceException", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(nre.Message);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Contacte con el desarrollador de la aplicación. Error: GeneralException", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(e.Message);
+            }
+
         }
 
         public void FillDatagrid()

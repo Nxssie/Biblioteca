@@ -69,7 +69,7 @@ namespace Biblioteca.View
             this.exitBttn.TabIndex = 1;
             this.exitBttn.Text = "Salir";
             this.exitBttn.UseVisualStyleBackColor = true;
-            this.exitBttn.Click += new System.EventHandler(this.exitBttn_Click);
+            this.exitBttn.Click += new System.EventHandler(this.ExitBttn_Click);
             // 
             // ListView
             // 

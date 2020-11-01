@@ -15,9 +15,21 @@ namespace Biblioteca.Controller
 
         public Controller()
         {
-            mv = new MainView();
-            mv.ButtonClick += Listeners;
-            mv.ShowDialog();
+            try
+            {
+                mv = new MainView();
+                mv.ButtonClick += Listeners;
+                mv.ShowDialog();
+            } catch (NullReferenceException nre)
+            {
+                MessageBox.Show("Contacte con el desarrollador de la aplicación. Error: NullReferenceException", "Error",MessageBoxButtons.OK);
+                Console.WriteLine(nre.Message);
+            } catch (Exception e)
+            {
+                MessageBox.Show("Contacte con el desarrollador de la aplicación. Error: GeneralException", "Error", MessageBoxButtons.OK);
+                Console.WriteLine(e.Message);
+            }
+            
             
         }
 
@@ -37,16 +49,40 @@ namespace Biblioteca.Controller
 
         private void OpenSearch()
         {
-            mv.Close();
-            mv.Dispose();
-            new SearchController();
+            try { 
+                mv.Close();
+                mv.Dispose();
+                new SearchController();
+            }
+            catch (NullReferenceException nre)
+            {
+                MessageBox.Show("Contacte con el desarrollador de la aplicación. Error: NullReferenceException", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(nre.Message);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Contacte con el desarrollador de la aplicación. Error: GeneralException", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(e.Message);
+            }
         }
 
         private void OpenList()
         {
-            mv.Close();
-            mv.Dispose();
-            new ListController();
+            try { 
+                mv.Close();
+                mv.Dispose();
+                new ListController();
+            }
+            catch (NullReferenceException nre)
+            {
+                MessageBox.Show("Contacte con el desarrollador de la aplicación. Error: NullReferenceException", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(nre.Message);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Contacte con el desarrollador de la aplicación. Error: GeneralException", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(e.Message);
+            }
         }
         
         private void CloseApplication()

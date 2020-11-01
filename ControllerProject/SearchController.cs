@@ -15,10 +15,23 @@ namespace Biblioteca.Controller
 
         public SearchController()
         {
-            model = new Model.Model();
-            sv = new SearchView();
-            sv.ClickButton += Listeners;
-            sv.ShowDialog();
+            try
+            {
+                model = new Model.Model();
+                sv = new SearchView();
+                sv.ClickButton += Listeners;
+                sv.ShowDialog();
+            }
+            catch (NullReferenceException nre)
+            {
+                MessageBox.Show("Contacte con el desarrollador de la aplicación. Error: NullReferenceException", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(nre.Message);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Contacte con el desarrollador de la aplicación. Error: GeneralException", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(e.Message);
+            }
         }
 
         private void Listeners(int value)
@@ -63,14 +76,39 @@ namespace Biblioteca.Controller
 
         private void SearchAlumno()
         {
-            Alumno alumno = model.GetAlumno(sv.GetDniTextBox.Text);
-            FillAlumnoLabels(alumno);
+            try
+            {
+                Alumno alumno = model.GetAlumno(sv.GetDniTextBox.Text);
+                    
+                if(alumno != null)
+                {
+                    FillAlumnoLabels(alumno);
+                } else
+                {
+                    MessageBox.Show("El alumno no existe", "Alumno inexistente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                
+                
+            } catch (Exception e)
+            {
+                MessageBox.Show("Contacte con el desarrollador de la aplicación. Error: GeneralException", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(e.Message);
+            }
+            
         }
 
         private void DeleteAlumno()
         {
-            model.DeleteAlumno(sv.GetDniLabel.Text);
-            RefreshForm();
+            try
+            {
+                model.DeleteAlumno(sv.GetDniLabel.Text);
+                RefreshForm();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Contacte con el desarrollador de la aplicación. Error: GeneralException", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(e.Message);
+            }
         }
 
         private void RefreshForm()

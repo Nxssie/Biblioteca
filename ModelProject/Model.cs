@@ -73,32 +73,47 @@ namespace Biblioteca.Model
 
         public Alumno GetAlumno(string dni)
         {
-
-            CheckConnection();
-            Alumno Sample;
-            string QuerySelect = "SELECT dni, nombre, apellido1, apellido2 FROM ALUMNOS WHERE dni='" + dni + "'";
-            MySqlCommand Query = new MySqlCommand(QuerySelect, Connector);
-            MySqlDataReader dataReader = Query.ExecuteReader();
-
-            string Dni = "";
-            string Nombre = "";
-            string PrimApellido = "";
-            string SegApellido = "";
-
-            while (dataReader.Read())
+            try
             {
-                Dni = dataReader.GetString(0);
-                Nombre = dataReader.GetString(1);
-                PrimApellido = dataReader.GetString(2);
-                SegApellido = dataReader.GetString(3);
+                CheckConnection();
+                Alumno Sample;
+                string QuerySelect = "SELECT dni, nombre, apellido1, apellido2 FROM ALUMNOS WHERE dni='" + dni + "'";
+                MySqlCommand Query = new MySqlCommand(QuerySelect, Connector);
+                MySqlDataReader dataReader = Query.ExecuteReader();
+
+                string Dni = "";
+                string Nombre = "";
+                string PrimApellido = "";
+                string SegApellido = "";
+
+                while (dataReader.Read())
+                {
+                    Dni = dataReader.GetString(0);
+                    Nombre = dataReader.GetString(1);
+                    PrimApellido = dataReader.GetString(2);
+                    SegApellido = dataReader.GetString(3);
+                }
+                dataReader.Close();
+                Connector.Close();
+
+                Sample = new Alumno(Dni, Nombre, PrimApellido, SegApellido);
+
+                return Sample;
+            } catch (MySqlException mysqle)
+            {
+                MessageBox.Show("Contacte con el gestor de la base de datos. Error: MySqlException", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(mysqle.Message);
+            } catch (Exception e)
+            {
+                MessageBox.Show("Contacte con el gestor de la base de datos. Error: GeneralException", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(e.Message);
             }
-            dataReader.Close();
-            Connector.Close();
+            finally
+            {
+                Connector.Close();
+            }
 
-            Sample = new Alumno(Dni, Nombre, PrimApellido, SegApellido);
-
-
-            return Sample;
+            return null;
         }
 
         public void CheckConnection()

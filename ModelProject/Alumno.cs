@@ -14,10 +14,10 @@ namespace Biblioteca.Model
 
         public Alumno(string dni, string nombre, string primApellido, string segApellido)
         {
-            this.Dni = dni;
-            this.Nombre = nombre;
-            this.PrimApellido = primApellido;
-            this.SegApellido = segApellido;
+            Dni = dni;
+            Nombre = nombre;
+            PrimApellido = primApellido;
+            SegApellido = segApellido;
         }
 
         public string Dni { get => dni; set => dni = value; }
